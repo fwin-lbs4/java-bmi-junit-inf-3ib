@@ -1,24 +1,19 @@
 package quest.flo;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
-
-
     static Stream<Map<String, Float[]>> hashMapProvider() {
         return Stream.of(
-                Map.of("You are critically underweight", new Float[]{0F, 15F, 16F}),
+                Map.of("You are critically underweight", new Float[]{1F, 15F, 16F}),
                 Map.of("You are underweight", new Float[]{16.1F, 19F, 19.9F}),
                 Map.of("You are normal weight", new Float[]{20F, 24F, 24.9F}),
                 Map.of("You are overweight", new Float[]{25F, 29F, 29.9F}),
@@ -34,24 +29,19 @@ class CalculatorTest {
         assertEquals(new Calculator(70F, 1.78F).getBmi(), (70F / (1.78F * 1.78F)), "Can calculate BMI");
     }
 
-    @Test
-    @DisplayName("Print a String judging the users BMI!")
-    void judgeUser() {
-
-    }
-
     @ParameterizedTest
     @MethodSource("hashMapProvider")
-    void judgeDifferentUsers(Map<String, Float[]> argument) {
-        String str;
-        Float[] numbers = new Float[3];
+    void judgeDifferentUsers(Map<String, Float[]> argument) throws Exception {
+        for (String key : argument.keySet()) {
+            for (Float num : argument.get(key)) {
+                Calculator calc = new Calculator(num, 1F);
 
-        for (String key :
-                argument.keySet()) {
-            str = key;
-            numbers = argument.get(key);
-
-            break;
+                assertEquals(
+                        key + ": " + calc.getBmi().toString() + "\n",
+                        calc.judgeUser(),
+                "Can judge the User"
+                );
+            }
         }
     }
 }

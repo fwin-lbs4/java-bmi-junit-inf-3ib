@@ -139,27 +139,27 @@ public class Calculator {
         }
 
         // Here we use early returns to stop execution if the correct "case" has matched
-        if (bmi <= 16) {
+        if (bmi <= 16F) {
             return printJudgement("You are critically underweight");
         }
 
-        if (bmi <= 19.9) {
+        if (bmi <= 19.9F) {
             return printJudgement("You are underweight");
         }
 
-        if (bmi <= 24.9) {
+        if (bmi <= 24.9F) {
             return printJudgement("You are normal weight");
         }
 
-        if (bmi <= 29.9) {
+        if (bmi <= 29.9F) {
             return printJudgement("You are overweight");
         }
 
-        if (bmi <= 34.9) {
+        if (bmi <= 34.9F) {
             return printJudgement("You are obese (class 1)");
         }
 
-        if (bmi <= 39.9) {
+        if (bmi <= 39.9F) {
             return printJudgement("You are obese (class 2)");
         }
 
